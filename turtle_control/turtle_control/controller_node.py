@@ -81,11 +81,11 @@ class ControladorTortuga(Node):
                 self.pub_vel.publish(msg)
                 return False
 
-            if self.pose_actual is None:
+            if self.pose_act is None:
                 time.sleep(0.1)
                 continue
 
-            distancia = math.sqrt((x_obj - self.pose_actual.x)**2 + (y_obj - self.pose_actual.y)**2)
+            distancia = math.sqrt((x_obj - self.pose_act.x)**2 + (y_obj - self.pose_act.y)**2)
             
             if distancia < 0.1: 
                 msg.linear.x = 0.0
@@ -93,8 +93,8 @@ class ControladorTortuga(Node):
                 self.pub_vel.publish(msg)
                 return True 
 
-            angulo_objetivo = math.atan2(y_obj - self.pose_actual.y, x_obj - self.pose_actual.x)
-            error_angulo = angulo_objetivo - self.pose_actual.theta
+            angulo_objetivo = math.atan2(y_obj - self.pose_act.y, x_obj - self.pose_act.x)
+            error_angulo = angulo_objetivo - self.pose_act.theta
             error_angulo = math.atan2(math.sin(error_angulo), math.cos(error_angulo)) 
 
 
